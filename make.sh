@@ -104,7 +104,7 @@ echo -e "${Red}- 开始分解底包 Images"
 for i in system_ext odm vendor; do
   echo -e "${Yellow}- 正在分解底包: $i.img"
   cd "$GITHUB_WORKSPACE"/"${device}"
-  sudo $erofs_extract -i "$GITHUB_WORKSPACE"/Extra_dir/$i.img -x -s
+  sudo debugfs -R "rdump / ." "$GITHUB_WORKSPACE"/Extra_dir/$i.img
   rm -rf "$GITHUB_WORKSPACE"/Extra_dir/$i.img
 done
 

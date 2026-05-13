@@ -24,6 +24,7 @@ magiskboot="$GITHUB_WORKSPACE"/tools/magiskboot
 a7z="$GITHUB_WORKSPACE"/tools/7zzs
 payload_extract="$GITHUB_WORKSPACE"/tools/payload_extract
 erofs_extract="$GITHUB_WORKSPACE"/tools/extract.erofs
+imjtool="$GITHUB_WORKSPACE"/tools/imjtool
 erofs_mkfs="$GITHUB_WORKSPACE"/tools/mkfs.erofs
 lpmake="$GITHUB_WORKSPACE"/tools/lpmake
 
@@ -104,7 +105,7 @@ echo -e "${Red}- 开始分解底包 Images"
 for i in system_ext odm vendor; do
   echo -e "${Yellow}- 正在分解底包: $i.img"
   cd "$GITHUB_WORKSPACE"/"${device}"
-  sudo $ext4_extract -i "$GITHUB_WORKSPACE"/Extra_dir/$i.img -x -s
+  sudo $imjtool "$GITHUB_WORKSPACE"/Extra_dir/$i.img extract
   rm -rf "$GITHUB_WORKSPACE"/Extra_dir/$i.img
 done
 
